@@ -14,13 +14,11 @@ public class ProductRecommendationEngine extends JFrame {
         setSize(950, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        // Paneli i Përgjithshëm
+        
         JPanel panelKryesor = new JPanel(new BorderLayout(15, 15));
-        panelKryesor.setBackground(new Color(240, 244, 248)); // Gri e lehtë moderne
+        panelKryesor.setBackground(new Color(240, 244, 248)); 
         panelKryesor.setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Dashboard i sipërm (Paneli i Kontrollit)
         JPanel panelKontroll = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 12));
         panelKontroll.setBackground(Color.WHITE);
         panelKontroll.setBorder(BorderFactory.createLineBorder(new Color(218, 226, 234), 1));
@@ -37,7 +35,7 @@ public class ProductRecommendationEngine extends JFrame {
         });
 
         JButton btn = new JButton("Gjej Produktet");
-        btn.setBackground(new Color(43, 108, 176)); // Blu e pastër
+        btn.setBackground(new Color(43, 108, 176)); 
         btn.setForeground(Color.WHITE);
         btn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         btn.setFocusPainted(false);
@@ -47,7 +45,6 @@ public class ProductRecommendationEngine extends JFrame {
         panelKontroll.add(lStrat); panelKontroll.add(cmbStrateg);
         panelKontroll.add(btn);
 
-        // Zona Qendrore ku do të rreshtohen kartat e avancuara grafike
         zonaEKartave = new JPanel();
         zonaEKartave.setLayout(new BoxLayout(zonaEKartave, BoxLayout.Y_AXIS));
         zonaEKartave.setBackground(new Color(240, 244, 248));
@@ -56,7 +53,6 @@ public class ProductRecommendationEngine extends JFrame {
         scroll.setBorder(null);
         scroll.getVerticalScrollBar().setUnitIncrement(16);
 
-        // Shiriti i Informacionit poshtë
         statusiPoshte = new JLabel(" Gati.");
         statusiPoshte.setOpaque(true);
         statusiPoshte.setBackground(new Color(45, 55, 72));
@@ -64,10 +60,8 @@ public class ProductRecommendationEngine extends JFrame {
         statusiPoshte.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         statusiPoshte.setBorder(BorderFactory.createEmptyBorder(6, 10, 6, 10));
 
-        // Lidhja e butonit me veprimin grafik
         btn.addActionListener(e -> rifreskoKartatGrafike());
 
-        // Ngarkimi fillestar automatik
         rifreskoKartatGrafike();
 
         panelKryesor.add(panelKontroll, BorderLayout.NORTH);
@@ -76,7 +70,6 @@ public class ProductRecommendationEngine extends JFrame {
         add(panelKryesor);
     }
 
-    // Ndërtimi i plotë i GUI-t të avancuar me Karta
     private void rifreskoKartatGrafike() {
         zonaEKartave.removeAll();
         User u = users[cmbUser.getSelectedIndex()];
@@ -84,9 +77,8 @@ public class ProductRecommendationEngine extends JFrame {
 
         for (int i = 0; i < listaRekomanduar.length; i++) {
             Product p = listaRekomanduar[i];
-            double piket = eng.skorreteFundit[p.id - 1]; // Merr pikët e llogaritura nga algoritmi
+            double piket = eng.skorreteFundit[p.id - 1]; 
 
-            // Krijimi i një Karte vizuale për produktin
             JPanel karta = new JPanel(new BorderLayout(15, 5));
             karta.setBackground(Color.WHITE);
             karta.setBorder(BorderFactory.createCompoundBorder(
@@ -95,7 +87,6 @@ public class ProductRecommendationEngine extends JFrame {
             ));
             karta.setMaximumSize(new Dimension(Short.MAX_VALUE, 90));
 
-            // Ana e majtë: Renditja, Emri dhe Përshkrimi i thjeshtë
             JPanel panelMajtas = new JPanel(new GridLayout(2, 1));
             panelMajtas.setOpaque(false);
             
@@ -110,11 +101,9 @@ public class ProductRecommendationEngine extends JFrame {
             panelMajtas.add(lblEmri);
             panelMajtas.add(lblPershkrim);
 
-            // Ana e djathtë: Pikët e përputhjes, Vlerësimi me yje dhe Çmimi
             JPanel panelDjathtas = new JPanel(new FlowLayout(FlowLayout.RIGHT, 20, 8));
             panelDjathtas.setOpaque(false);
 
-            // Shfaqja e pikëve në mënyrë normale pa përmendur AI
             JLabel lblPiket = new JLabel(String.format("Pikët e Përshtatjes: %.1f", piket));
             lblPiket.setFont(new Font("Segoe UI", Font.BOLD, 11));
             lblPiket.setForeground(new Color(43, 108, 176));
@@ -139,7 +128,7 @@ public class ProductRecommendationEngine extends JFrame {
             karta.add(panelDjathtas, BorderLayout.EAST);
 
             zonaEKartave.add(karta);
-            zonaEKartave.add(Box.createRigidArea(new Dimension(0, 10))); // Hapësirë vertikale mes kartave
+            zonaEKartave.add(Box.createRigidArea(new Dimension(0, 10))); 
         }
 
         statusiPoshte.setText(" U gjeneruan " + listaRekomanduar.length + " produkte të sugjeruara për klientin " + u.emri);
