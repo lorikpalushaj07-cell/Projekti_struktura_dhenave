@@ -3,7 +3,7 @@ import java.util.*;
 public class Engine {
     Product[] prod;
     User[] users;
-    double[] skorreteFundit; // Ruan pikët e llogaritura për t'i shfaqur në grafikë
+    double[] skorreteFundit; 
 
     public Engine(Product[] prod, User[] users) { this.prod = prod; this.users = users; }
 
